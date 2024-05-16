@@ -17,24 +17,12 @@ import {
 } from "@/components/ui/table";
 
 import { ResponsiveLine } from "@nivo/line"
-import { UserService, api } from "@/services/api"
-import { useEffect } from "react"
 import { Sidebar } from "./_components/sidebar"
 import { Header } from "./_components/header"
 
-//const userService = new UserService();
 
-export default function Dashboard() {
-  useEffect(()=>{
-    api.get('http://localhost:3333/users')
-    .then((response)=> {
-      console.log(response.data);
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-  }, [])
-
+export default async function Dashboard() {
+  
   return (
     <div className="flex min-h-screen">
       <Sidebar/>
