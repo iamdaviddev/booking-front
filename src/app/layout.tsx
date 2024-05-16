@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Libre_Franklin } from 'next/font/google'
 import "./globals.css";
 import NextAuthSessionProvider from "@/providers/SessionProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const libre_franklin = Libre_Franklin({
   subsets: ['latin'],
@@ -24,6 +26,7 @@ export default function RootLayout({
       <body className={libre_franklin.variable}>
         <NextAuthSessionProvider>
           {children}
+          <ToastContainer />
         </NextAuthSessionProvider>
       </body>
     </html>

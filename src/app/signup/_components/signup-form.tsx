@@ -1,34 +1,30 @@
 'use client'
 
-import { signIn } from "next-auth/react";
+import { AuthService, type signUpDto } from "@/services/auth-service";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form"
+import { toast } from "react-toastify";
 
 export function SignUp() {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
 
   const router = useRouter()
   
   async function handleSignIn(data: any) {
-    const result = await  signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-    });
-
-    if(result?.error){
-      console.log(result)
-      return
+    try{
+      const result = await AuthService.signUp(data)
+      
+      if(result){
+        toast.success("Conta criada com sucesso!")
+        reset()
+      }
+    }catch(err){
+      toast.warning("UPS!! Erro inesperado!")
     }
-
-    router.replace('/auth')
   }
 
   return (
     <> 
-      <meta>
-        <title>Criar conta</title>
-      </meta>
       <div className="flex h-screen bg-gray-200">
         <div className="m-auto bg-white text-white p-8 rounded-lg w-[450px] shadow-lg">
           <div className="flex flex-col items-center mb-6">
@@ -45,7 +41,7 @@ export function SignUp() {
                 id="nome"
                 placeholder="John Doe"
                 type="text"
-                {...register("nome", { required: true })}
+                {...register("name", { required: true })}
               />
             </div>
             <div>
