@@ -1,13 +1,14 @@
 'use client'
 import { createContext, useEffect, useLayoutEffect, useState } from "react"
-import { getCookie } from "cookies-next"
+import { getCookie, deleteCookie } from "cookies-next"
 import { TOKEN_KEY, USER_KEY } from "@/lib/utils"
 
 
 interface authProps {
   token: string;
   user: any;
-  check: () => void
+  check: () => void;
+  logOut: () => void;
 }
 
 export const authContext = createContext({} as authProps)
@@ -19,6 +20,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   function getTOKEN(){
     const check = getCookie(TOKEN_KEY)
     return check
+  }
+
+  function logOut(){
+    deleteCookie(TOKEN_KEY)
+    deleteCookie(USER_KEY)
+    setToken(undefined)
+    setUser(undefined)
+    window.location.href = '/'
   }
 
   function getUSER(){
@@ -39,7 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-      <authContext.Provider value={{ token: token, user: user, check: check}}>
+      <authContext.Provider value={{ token: token, user: user, check: check, logOut: logOut}}>
         {children}
       </authContext.Provider>
   )

@@ -19,10 +19,29 @@ import {
 import { ResponsiveLine } from "@nivo/line"
 import { Sidebar } from "./_components/sidebar"
 import { Header } from "./_components/header"
+import { useContext, useLayoutEffect } from "react";
+import { authContext } from "@/providers/SessionProvider";
 
 
-export default async function Dashboard() {
-  
+export default function Dashboard() {
+  const { token, user } = useContext(authContext)
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // useLayoutEffect(() => {
+  //   if(!user || !token){
+  //   }
+  // }, [])
+
+  if(!user || !token){
+    window.location.href = '/auth'
+    return ''
+  } 
+  if(user.userType === 2){
+    window.location.href = '/'
+    return ''
+  }
+
+
   return (
     <div className="flex min-h-screen">
       <Sidebar/>
