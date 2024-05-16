@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useLayoutEffect, useState } from "react"
 import { getCookie } from "cookies-next"
 import { TOKEN_KEY, USER_KEY } from "@/lib/utils"
 
@@ -31,12 +31,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     getUSER()
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const token = getTOKEN()
     const user = getUSER() && JSON.parse(getUSER())
     setToken(token)
     setUser(user)
-    
   }, [])
 
   return (

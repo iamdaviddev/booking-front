@@ -23,7 +23,7 @@ export async function AuthForm() {
         
         setCookie(TOKEN_KEY, result.token, { expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) })
         setCookie(USER_KEY, JSON.stringify(result.userAlreadyExists), { expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) })
-        router.replace('/')
+        window.location.href = '/'
       }
     }catch(err){
       toast.error("Usuário ou senha incorreta!")
