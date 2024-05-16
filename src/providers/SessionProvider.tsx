@@ -2,11 +2,13 @@
 import { createContext, useEffect, useLayoutEffect, useState } from "react"
 import { getCookie, deleteCookie } from "cookies-next"
 import { TOKEN_KEY, USER_KEY } from "@/lib/utils"
+import { useFetch } from "@/hooks/useFetch";
 
 
 interface authProps {
   token: string;
   user: any;
+  rooms: { rooms: any[] }
   check: () => void;
   logOut: () => void;
 }
@@ -16,6 +18,10 @@ export const authContext = createContext({} as authProps)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<any>(undefined)
   const [user, setUser] = useState<any>(undefined)
+  const { data: rooms } = useFetch("/rooms")
+
+  console.log(rooms, ":::::::::::::");
+  
 
   function getTOKEN(){
     const check = getCookie(TOKEN_KEY)
@@ -48,7 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-      <authContext.Provider value={{ token: token, user: user, check: check, logOut: logOut}}>
+      <authContext.Provider value={{ token: token, user: user, check: check, logOut: logOut, rooms: rooms?.rooms}}>
         {children}
       </authContext.Provider>
   )

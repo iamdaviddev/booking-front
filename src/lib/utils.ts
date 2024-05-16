@@ -8,3 +8,5 @@ export const USER_KEY = "user_booking"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+
