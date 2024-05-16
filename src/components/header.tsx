@@ -12,9 +12,6 @@ import { authContext } from "@/providers/SessionProvider";
 export function Header() {
   const router = useRouter()
   const { token, user } = useContext(authContext)
-
-  console.log(token, "Meu token");
-  console.log(user, "Meu user");
   
 
   function handleLogin(){
