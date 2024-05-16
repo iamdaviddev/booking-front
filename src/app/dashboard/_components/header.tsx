@@ -10,8 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Bell, LogOut, SearchIcon, Settings, User } from "lucide-react";
 import { Profile } from "@/components/avatar";
+import { useContext } from "react";
+import { authContext } from "@/providers/SessionProvider";
 
 export function Header(){
+  const { user, token, logOut } = useContext(authContext)
   return(
     <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 flex items-center justify-between">
     <div className="flex items-center gap-4">
@@ -26,12 +29,14 @@ export function Header(){
     </div>
     <div className="flex items-center gap-4">
       <Button className="rounded-full" size="icon" variant="ghost">
-        <Bell />
+        {/* <Bell /> */}
       </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="rounded-full" size="icon" variant="ghost">
-              <Profile/>
+              <div className="relative right-24">
+                <Profile user={user}/>
+              </div>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" sideOffset={12}>
@@ -44,7 +49,7 @@ export function Header(){
               Definições
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => logOut()}>
               <LogOut className="h-4 w-4 mr-2" />
               Sair
             </DropdownMenuItem>
