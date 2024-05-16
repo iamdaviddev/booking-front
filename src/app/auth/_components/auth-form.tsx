@@ -1,8 +1,13 @@
 'use client'
 
-import { signIn } from "next-auth/react";
+import { AuthService } from "@/services/auth-service";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form"
+import { toast } from "react-toastify";
+import { setCookie } from "cookies-next"
+import { TOKEN_KEY, USER_KEY } from "@/lib/utils";
+import { useContext } from "react";
+import { authContext } from "@/providers/SessionProvider";
 
 export async function AuthForm() {
   const { register, handleSubmit } = useForm();
@@ -10,18 +15,19 @@ export async function AuthForm() {
   const router = useRouter();
 
   async function handleSignIn(data: any) {
-    const result = await  signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-    });
-
-    if(result?.error){
-      console.log(result)
-      return
+    try{
+      const result = await (await AuthService.login(data)).data
+      if(result){
+        toast.success("Login efetuado com sucesso!")
+        console.log(result, "result");
+        
+        setCookie(TOKEN_KEY, result.token, { expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) })
+        setCookie(USER_KEY, JSON.stringify(result.userAlreadyExists), { expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) })
+        router.replace('/')
+      }
+    }catch(err){
+      toast.error("Usuário ou senha incorreta!")
     }
-
-    router.replace('/')
   }
 
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Franklin } from 'next/font/google'
 import "./globals.css";
-import NextAuthSessionProvider from "@/providers/SessionProvider";
+import { AuthProvider } from "@/providers/SessionProvider";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,10 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={libre_franklin.variable}>
-        <NextAuthSessionProvider>
+        <AuthProvider>
           {children}
           <ToastContainer />
-        </NextAuthSessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );
