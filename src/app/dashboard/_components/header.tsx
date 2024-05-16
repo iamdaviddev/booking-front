@@ -37,16 +37,16 @@ export function Header(){
           <DropdownMenuContent align="end" sideOffset={12}>
             <DropdownMenuItem>
               <User className="h-4 w-4 mr-2" />
-              Profile
+              Perfil
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="h-4 w-4 mr-2" />
-              Settings
+              Definições
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut className="h-4 w-4 mr-2" />
-              Logout
+              Sair
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

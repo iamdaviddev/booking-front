@@ -17,11 +17,11 @@ export function Sidebar(){
           <span className="text-white font-semibold text-lg">yami</span>
         </div>
         <nav className="space-y-2">
-          <Link className="flex items-center gap-2 hover:bg-gray-800 px-3 py-2 rounded" href="#">
+          <Link className="flex items-center gap-2 hover:bg-gray-800 px-3 py-2 rounded" href="/dashboard">
             <LayoutDashboard />
             <span>Dashboard</span>
           </Link>
-          <Link className="flex items-center gap-2 hover:bg-gray-800 px-3 py-2 rounded" href="#">
+          <Link className="flex items-center gap-2 hover:bg-gray-800 px-3 py-2 rounded" href="/dashboard/bookings">
             <Home/>
             <span>Quartos</span>
           </Link>
