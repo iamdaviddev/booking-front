@@ -6,10 +6,16 @@ import { useRouter } from "next/navigation";
 import { useSession } from 'next-auth/react';
 import { Profile } from '../components/avatar'
 import { Hotel } from "lucide-react";
+import { useContext } from "react";
+import { authContext } from "@/providers/SessionProvider";
 
 export function Header() {
   const router = useRouter()
-  const { data: session } = useSession()
+  const { token, user } = useContext(authContext)
+
+  console.log(token, "Meu token");
+  console.log(user, "Meu user");
+  
 
   function handleLogin(){
     router.push('/auth')
@@ -41,7 +47,7 @@ export function Header() {
             </Link>
           </nav>
           {
-            session ? (<Profile/>) : (
+            user ? (<Profile user={user} />) : (
               <div className="flex items-center gap-4">
                 <Button 
                   className="hidden md:inline-flex" 
