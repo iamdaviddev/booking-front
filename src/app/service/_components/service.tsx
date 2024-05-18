@@ -34,7 +34,7 @@ export function Service() {
                 Descubra nosso restaurante de classe mundial, academia de última geração e serviços de estacionamento convenientes, tudo em um só lugar.
               </p>
               <div className="flex flex-col gap-2 sm:flex-row">
-                <Button variant="primary">Explorar serviços</Button>
+                <Button>Explorar serviços</Button>
                 <Button variant="secondary" onClick={handleBooking}>Reservar</Button>
               </div>
             </div>
@@ -68,7 +68,7 @@ export function Service() {
                 <StarIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
                 <LeafIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
               </div>
-              <Button variant="primary">Explorar Menu</Button>
+              <Button>Explorar Menu</Button>
             </div>
           </div>
         </section>
@@ -86,7 +86,7 @@ export function Service() {
                 <HeartPulseIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
                 <TrainTrackIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
               </div>
-              <Button variant="primary">Entrar</Button>
+              <Button>Entrar</Button>
             </div>
             <Image
               alt="Gym"
@@ -118,7 +118,7 @@ export function Service() {
                 <LockIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
                 <AccessibilityIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
               </div>
-              <Button variant="primary">Saber mais</Button>
+              <Button>Saber mais</Button>
             </div>
           </div>
         </section>
