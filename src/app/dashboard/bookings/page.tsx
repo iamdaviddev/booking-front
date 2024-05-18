@@ -2,8 +2,12 @@ import { Trash } from "lucide-react";
 import { Header } from "../_components/header";
 import { Sidebar } from "../_components/sidebar";
 import { Button } from "@/components/ui/button";
+import { useContext } from "react";
+import { authContext } from "@/providers/SessionProvider";
 
 export default function Bookings(){
+  const { bookings } = useContext(authContext)
+
   return(
     <div className="flex min-h-screen">
       <Sidebar/>
@@ -23,18 +27,17 @@ export default function Bookings(){
                   <th className="px-6 py-4 text-left font-medium text-gray-900 dark:text-gray-100">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                <tr>
-                  <td className="px-6 py-4">user.id</td>
-                  <td className="px-6 py-4">user.name</td>
-                  <td className="px-6 py-4">user.email</td>
-                  <td className="px-6 py-4">
-                    <Button>
-                      Confirmar
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
+              {
+                bookings.bookings.map((booking) => (
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
+                    <tr>
+                      <td className="px-6 py-4">{booking.id}</td>
+                      <td className="px-6 py-4">{booking.name}</td>
+                      <td className="px-6 py-4">{booking.email}</td>
+                    </tr>
+                  </tbody>
+                ))
+              }
             </table>
           </div>
         </div>

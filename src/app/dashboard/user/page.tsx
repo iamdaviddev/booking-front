@@ -2,22 +2,13 @@ import { Button } from "@/components/ui/button"
 import Modal from "../_components/modal"
 import { Sidebar } from "../_components/sidebar"
 import { Header } from "../_components/header"
-import { api } from "@/services/api"
 import { Trash } from "lucide-react"
-import { useState } from "react"
-
-const getUsers = async () => {
-  const response = await api.get("/users");
-  return response.data;
-}
+import { useContext } from "react"
+import { authContext } from "@/providers/SessionProvider"
 
 export default async function User() {
-  const [users, setUsers] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const { users } = useContext(authContext)
 
-  const handleShowModal = () => {
-    setShowModal(true);
-  };
 
   return (
     <div className="flex min-h-screen">
@@ -38,16 +29,20 @@ export default async function User() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-              <tr>
-                <td className="px-6 py-4">user.id</td>
-                <td className="px-6 py-4">user.name</td>
-                <td className="px-6 py-4">user.email</td>
-                <td className="px-6 py-4">
-                  <Button>
-                    <Trash/>
-                  </Button>
-                </td>
-              </tr>
+              {
+                users.users.map((user) => (
+                  <tr>
+                    <td className="px-6 py-4">{user.id}</td>
+                    <td className="px-6 py-4">{user.name}</td>
+                    <td className="px-6 py-4">{user.email}</td>
+                    <td className="px-6 py-4">
+                      <Button>
+                        <Trash/>
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
           </div>

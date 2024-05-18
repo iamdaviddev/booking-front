@@ -36,21 +36,19 @@ import {
 } from 'lucide-react';
 
 import imgA from '/public/imgA.jpg';
-import imgB from '/public/imgB.jpg';
-import imgC from '/public/imgC.jpg';
 
 import bannerImg from '/public/banne.jpg';
-import roomImg from '/public/room.jpg';
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { RoomService } from "@/services/room-service";
+import { useContext } from "react";
 import { Header } from "@/components/header";
 import { Gallery } from "@/components/gallery";
 import { Footer } from "@/components/footer";
-import { useFetch } from "@/hooks/useFetch";
 import { authContext } from "@/providers/SessionProvider";
+import { AboutUs } from "@/components/aboutus";
+import Modal from "./_components/modal";
 
 export function HomeView() {
     const { rooms } = useContext(authContext)  
+    
     return (
       <>
         <Header/>
@@ -170,8 +168,10 @@ export function HomeView() {
                           Enjoy a comfortable stay in the heart of the city.
                         </p>
                         <div className="flex justify-between items-center">
-                          <span className="text-primary font-semibold">KZ 60.000/Noite</span>
-                          <Button variant="outline">Reservar</Button>
+                          <span className="text-primary font-semibold">
+                            KZ {r?.price}/noite
+                          </span>
+                          <Modal/>
                         </div>
                       </CardContent>
                     </Link>
@@ -183,67 +183,10 @@ export function HomeView() {
           <section className="bg-gray-100 dark:bg-gray-800 py-12 md:py-20 container">
             <div className="container mx-auto px-4">
               <div className="mb-8 md:mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Explore by Location</h2>
-                <p className="text-gray-600 dark:text-gray-400 text-lg">Find hotels in your desired destination</p>
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Sobre nós</h2>
+                <p className="text-gray-600 dark:text-gray-400 text-lg"></p>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <Link className="block" href="#">
-                  <Image
-                    alt="New York"
-                    className="rounded-lg w-full h-40 object-cover"
-                    height={200}
-                    src={roomImg}
-                    style={{
-                      aspectRatio: "300/200",
-                      objectFit: "cover",
-                    }}
-                    width={300}
-                  />
-                  <h3 className="mt-2 text-lg font-semibold">New York</h3>
-                </Link>
-                <Link className="block" href="#">
-                  <Image
-                    alt="Paris"
-                    className="rounded-lg w-full h-40 object-cover"
-                    height={200}
-                    src={roomImg}
-                    style={{
-                      aspectRatio: "300/200",
-                      objectFit: "cover",
-                    }}
-                    width={300}
-                  />
-                  <h3 className="mt-2 text-lg font-semibold">Paris</h3>
-                </Link>
-                <Link className="block" href="#">
-                  <Image
-                    alt="London"
-                    className="rounded-lg w-full h-40 object-cover"
-                    height={200}
-                    src={roomImg}
-                    style={{
-                      aspectRatio: "300/200",
-                      objectFit: "cover",
-                    }}
-                    width={300}
-                  />
-                  <h3 className="mt-2 text-lg font-semibold">London</h3>
-                </Link>
-                <Link className="block" href="#">
-                  <Image
-                    alt="Tokyo"
-                    className="rounded-lg w-full h-40 object-cover"
-                    height={200}
-                    src={roomImg}
-                    style={{
-                      aspectRatio: "300/200",
-                      objectFit: "cover",
-                    }}
-                    width={300}
-                  />
-                  <h3 className="mt-2 text-lg font-semibold">Tokyo</h3>
-                </Link>
-              </div>
+              <AboutUs/>
             </div>
           </section>
           <section className="py-12 md:py-20 container">

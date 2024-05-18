@@ -8,6 +8,7 @@ import { Profile } from '../components/avatar'
 import { Hotel } from "lucide-react";
 import { useContext } from "react";
 import { authContext } from "@/providers/SessionProvider";
+import { AvatarUser } from "./profile";
 
 export function Header() {
   const router = useRouter()
@@ -44,7 +45,7 @@ export function Header() {
             </Link>
           </nav>
           {
-            user ? (<Profile user={user} />) : (
+            user ? (<AvatarUser />) : (
               <div className="flex items-center gap-4">
                 <Button 
                   className="hidden md:inline-flex" 

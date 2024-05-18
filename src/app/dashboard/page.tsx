@@ -26,12 +26,6 @@ import { authContext } from "@/providers/SessionProvider";
 export default function Dashboard() {
   const { token, user } = useContext(authContext)
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  // useLayoutEffect(() => {
-  //   if(!user || !token){
-  //   }
-  // }, [])
-
   if(!user || !token){
     window.location.href = '/auth'
     return ''

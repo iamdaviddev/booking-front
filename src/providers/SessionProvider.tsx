@@ -11,6 +11,8 @@ interface authProps {
   rooms: { rooms: any[] }
   check: () => void;
   logOut: () => void;
+  users: { users: any[] }
+  bookings: { bookings: any[] }
 }
 
 export const authContext = createContext({} as authProps)
@@ -19,7 +21,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<any>(undefined)
   const [user, setUser] = useState<any>(undefined)
   const { data: rooms } = useFetch("/rooms")
-
+  const { data: bookings } = useFetch("/bookings")
+  const { data: users } = useFetch("/users")
   console.log(rooms, ":::::::::::::");
   
 
@@ -54,7 +57,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-      <authContext.Provider value={{ token: token, user: user, check: check, logOut: logOut, rooms: rooms?.rooms}}>
+      <authContext.Provider value={{ token: token, user: user, check: check, logOut: logOut, rooms: rooms?.rooms , users: user?.users, bookings: bookings?.bookings }}>
         {children}
       </authContext.Provider>
   )

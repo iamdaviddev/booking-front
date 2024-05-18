@@ -7,8 +7,6 @@ import { toast } from "react-toastify";
 
 export function SignUp() {
   const { register, handleSubmit, reset } = useForm()
-
-  const router = useRouter()
   
   async function handleSignIn(data: any) {
     try{

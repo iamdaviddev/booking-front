@@ -24,7 +24,7 @@ export async function AuthForm() {
         setCookie(TOKEN_KEY, result.token, { expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) })
         setCookie(USER_KEY, JSON.stringify(result.userAlreadyExists), { expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) })
         // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-        result.userAlreadyExists.userType === 1 ? window.location.href = '/dashboard' : window.location.href = '/'
+        result.userAlreadyExists.userType === 2 ? window.location.href = "/" : router.replace("/dashboard")
       }
     }catch(err){
       toast.error("Usuário ou senha incorreta!")
